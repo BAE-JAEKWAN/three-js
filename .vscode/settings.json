@@ -1,0 +1,31 @@
+{
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.mouseWheelZoom": true,
+  "workbench.startupEditor": "none",
+  "extensions.ignoreRecommendations": true,
+  "editor.tabSize": 2,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Prettier 설정
+  "prettier.singleQuote": true, // single 쿼테이션 사용 여부
+  "prettier.semi": false, // 세미콜론 사용 여부
+  "prettier.tabWidth": 2, // 탭 너비
+  "prettier.printWidth": 80, // 줄 바꿈 할 폭 길이
+  "prettier.bracketSpacing": true, // 객체 리터럴에서 괄호에 공백 삽입 여부
+  "prettier.arrowParens": "avoid",
+  "git.confirmSync": false, // 화살표 함수 괄호 사용 방식
+  "workbench.colorCustomizations": {
+    "activityBar.foreground": "#ffffff",
+    "activityBar.background": "#ff5e2e",
+    "activityBar.inactiveForeground": "#ac0000"
+  }
+}
