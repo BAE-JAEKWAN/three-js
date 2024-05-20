@@ -25,7 +25,7 @@
   "git.confirmSync": false, // 화살표 함수 괄호 사용 방식
   "workbench.colorCustomizations": {
     "activityBar.foreground": "#ffffff",
-    "activityBar.background": "#ff5e2e",
+    "activityBar.background": "#ff7640",
     "activityBar.inactiveForeground": "#ac0000"
   }
 }
