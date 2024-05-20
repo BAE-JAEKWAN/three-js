@@ -1,95 +1,63 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
 
-export default function Home() {
+import Image from 'next/image'
+import styles from './page.module.css'
+import {
+  Scene,
+  WebGLRenderer,
+  PerspectiveCamera,
+  Color,
+  DirectionalLight,
+  SRGBColorSpace,
+} from 'three'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { useEffect, useRef } from 'react'
+
+const Home = () => {
+  const canvas = useRef<HTMLCanvasElement | null>(null)
+  const renderer = new WebGLRenderer({
+    canvas: canvas.current ? canvas.current : undefined,
+    antialias: true,
+  })
+  renderer.outputColorSpace = SRGBColorSpace // 색상 인코딩. 이게 없으면 모델링 예제와 색이 다르게 나올수도.
+
+  // 1. 장면 생성
+  const scene = new Scene()
+
+  // 2. 카메라 생성
+  const camera = new PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  )
+  camera.position.set(0, 0.3, 1) // 카메라 위치 설정
+  let light = new DirectionalLight(0xffff00, 10)
+  scene.background = new Color('white')
+
+  // 3. 3D모델을 불러오는 로더 생성
+  const loader = new GLTFLoader()
+  loader.load(
+    '/3D_model/armchair_amarantha_by_porada/scene.gltf',
+    function (gltf) {
+      scene.add(gltf.scene)
+      scene.add(light)
+      renderer.render(scene, camera)
+    },
+    undefined,
+    error => {
+      console.error(error)
+    }
+  )
+
+  useEffect(() => {}, [])
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <div>3D 모델 들어갈 자리</div>
+      <canvas ref={canvas} width={'500'} height={'500'}></canvas>
     </main>
-  );
+  )
 }
+
+export default Home
